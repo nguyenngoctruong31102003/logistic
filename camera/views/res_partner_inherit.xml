@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="test" model="ir.ui.view">
+            <field name="name">test</field>
+            <field name="model">logistic.contacts</field>
+            <field name="inherit_id" ref="logistic.view_logistic_popup_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook"
+                    position="inside">
+                    <page string="Ảnh đơn hàng" name="Camera Capture">
+                        <field name="camera_open" widget="camera.capture" />
+                        <group>
+                            <group>
+                                <field name="image_1920_1" widget="image"
+                                    options="{'zoom': true, 'size':[200,200]}" />
+                            </group>
+                            <group>
+                                <field name="image_1920_2" widget="image"
+                                    options="{'zoom': true, 'size':[200,200]}" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="image_1920_3" widget="image"
+                                    options="{'zoom': true, 'size':[200,200]}" />
+                            </group>
+                            <group>
+                                <field name="image_1920_4" widget="image"
+                                    options="{'zoom': true, 'size':[200,200]}" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

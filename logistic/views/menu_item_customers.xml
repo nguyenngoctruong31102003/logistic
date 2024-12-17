@@ -1,0 +1,110 @@
+<odoo>
+    <data>
+        <!-- form view -->
+        <record id="form_view_res_partner" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Partner">
+                    <sheet>
+                        <group>
+                            <field name="name" string="Tên" />
+                            <field name="mobile" string="Số điện thoại" />
+                            <field name="email" string="Email" />
+                            <field name="street" string="Địa chỉ" />
+                            <field name="city" string="Thành phố" />
+                            <field name="country_id" string="Quốc gia" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view -->
+        <record id="tree_view_res_partner" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Tên" />
+                    <field name="mobile" string="Số điện thoại" />
+                    <field name="email" string="Email" />
+                    <field name="street" string="Địa chỉ" />
+                    <field name="city" string="Thành phố" />
+                    <field name="country_id" string="Quốc gia" />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- kanban -->
+        <record id="kanban_view_res_partner" model="ir.ui.view">
+            <field name="name">res.partner.kanban</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name" string="Tên" />
+                    <field name="mobile" string="Số điện thoại" />
+                    <field name="email" string="Email" />
+                    <field name="street" string="Địa chỉ" />
+                    <field name="city" string="Thành phố" />
+                    <field name="country_id" string="Quốc gia" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img alt="Avatar" t-att-src="kanban_image('res.partner', 'image_128', record.id.raw_value)" />
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <field name="name" />
+                                    </strong>
+                                    <div>
+                                        <span>
+                                            <field name="mobile" />
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            <field name="email" />
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            <field name="street" />
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            <field name="city" />
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            <field name="country_id" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action Contact -->
+        <record id="action_contact" model="ir.actions.act_window">
+            <field name="name">Danh sách khách hàng</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="target">current</field>
+            <field name="view_ids"
+                eval="[
+                    (5, 0, 0),
+                    (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}),
+                    (0, 0, {'view_mode': 'tree', 'view_id':  ref('base.view_partner_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('logistic.form_view_res_partner')}),
+                    ]" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+.popup-confirm-button {
+    background-color: #3C603C;
+    color: #FFF7ED;
+    margin-right: 10px;
+}
+
+.popup-cancel-button {
+    background-color: #DC3E37;
+    color: #FFF7ED;
+}

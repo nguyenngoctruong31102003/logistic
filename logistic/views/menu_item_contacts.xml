@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- Popup View -->
+        <record id="view_logistic_popup_form" model="ir.ui.view">
+            <field name="name">logistic.contacts.popup</field>
+            <field name="model">logistic.contacts</field>
+            <field name="arch" type="xml">
+                <form string="Xác nhận gửi hàng">
+                    <sheet>
+                        <div>
+                            <div>
+                                <h3>
+                                    Mã Đơn Hàng:   
+                                    <field name="order_code" readonly="1"/>
+                                </h3>
+                            </div>
+                            <hr style='border: 1px solid;'></hr>
+                            <group>
+                                <field name="sender_name" readonly="1"/>
+                                <field name="receiver_name" readonly="1"/>
+                                <field name="product_name" readonly="1"/>
+                            </group>
+                        </div>
+                        <hr style='border: 1px solid;'></hr>
+                        <!-- Notification -->
+                        <div style='margin-top: 25px;'>
+                            <h4>Thông báo !</h4>
+                            <p>Bạn vui lòng dán thẻ quản lý kiện hàng này lên thùng hàng của bạn.<br/>Để tránh việc sai sót trong lúc vận chuyển hàng hóa. Xin cảm ơn!</p>
+                        </div>
+                        <notebook>
+                        </notebook>
+                        <footer style='display: flex; justify-content: center;'>
+                            <button string="Gửi hàng" type="object" name="confirm_shipping" class="btn-primary"/>
+                            <button string="Hủy" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Form View-->
+        <record id="form_view_logistic_contacts" model="ir.ui.view">
+            <field name="name">logistic.contacts.form</field>
+            <field name="model">logistic.contacts</field>
+            <field name="arch" type="xml">
+                <form string="Thông tin đơn hàng" js_class="rfid_button">
+                    <sheet>
+                        <group>
+                            <!-- Thông tin người gửi -->
+                            <group>
+                                <div style="position: relative;  display: inline-flex; " class='col-lg-12'>
+                                    <h1 style='text-align: center; width: 1520px; margin: 50px;'>
+                                        THÔNG TIN NGƯỜI GỬI
+                                    </h1>
+                                    <!-- Hình người gửi -->
+                                    <!-- <field name="sender_profile_image" widget="image" class="oe_avatar" options="{'size': [100, 100]}"/> -->
+                                </div>
+                                
+                                <group>
+                                    <!-- Họ tên người gửi -->
+                                    <field name="sender_name" placeholder="Họ và tên người gửi" class="o_field_char" />
+                                    <!-- Số điên thoại người gửi -->
+                                    <field name="sender_mobile" widget="phone" 
+                                        options="{'required': True}"
+                                        placeholder="Vui lòng nhập số điện thoại" onchange="1"/>
+
+                                    <!-- Email người gửi -->
+                                    <field name="sender_email" widget="email" placeholder="Email"/>
+                                </group>
+                                <group>
+                                    <field name="sender_street" placeholder="Nhập địa chỉ(Số nhà/ngõ/ngách)" class="o_address_street"/>
+                                    <field name="sender_city" placeholder="Tỉnh/Thành phố" class="o_address_city" />
+                                    <field name="sender_country_id" placeholder="Quốc gia" class="o_address_country" />
+                                </group>
+                            </group>
+
+                            <!-- Thông tin người nhận -->
+                            <group>
+                                <div class="col-lg-12" style="position: relative;">
+                                    <h1 style='text-align: center; margin: 50px;'>
+                                        THÔNG TIN NGƯỜI NHẬN
+                                    </h1>
+                                </div>
+                                <group>
+                                    <!-- Họ tên người nhận -->
+                                    <field name="receiver_name" placeholder="Họ và tên người nhận" />
+                                    <!-- Số điện thoại người nhận -->
+                                    <field name="receiver_mobile" widget="phone" 
+                                        options="{'required': True}" 
+                                        placeholder="Vui lòng nhập số điện thoại" onchange="1"/>
+
+                                    <!-- Email người nhận -->
+                                    <field name="receiver_email" widget="email" placeholder="Email"/>
+                                </group>
+                                <group>
+                                    <field name="receiver_street" placeholder="Nhập địa chỉ (Số nhà/ngõ/ngách)" class="o_address_street"/>
+                                    <field name="receiver_city" placeholder="Tỉnh/Thành phố" class="o_address_city" />
+                                    <field name="receiver_country_id" placeholder="Quốc gia" class="o_address_country"/>
+                                </group>
+                            </group>
+                        </group>
+
+                        <!-- Thông tin hàng gửi -->
+                        <div>
+                            <!-- Header -->
+                            <div class="col-lg-12" style="position: relative; margin-bottom: 25px;">
+                                <hr style="border: 2px solid "/>
+                                <h1 style='text-align: center;'>
+                                    THÔNG TIN KIỆN HÀNG
+                                </h1>
+                                <!-- Hình hàng gửi -->
+                                <!-- <field name="product_template_image" widget="image" options="{'size': [200, 200]}"/> -->
+                            </div>
+                            <!-- Body -->
+
+                                <group>
+                                    <group>
+                                        <field name="product_name" placeholder="Vui lòng nhập tên món hàng cần gửi"/>
+                                        <field name="product_weight" placeholder="Vui lòng nhập trọng lượng hàng"/>
+                                        <field name="properties_of_goods" placeholder="Tùy Chọn"/>
+                                    </group>
+                                    <group>
+                                        <!-- <p>Kích Thước</p> -->
+                                        <field name="product_lengh"/>
+                                        <field name="product_width"/>
+                                        <field name="product_height"/>
+                                    </group>
+                                </group>
+                        </div>
+                        <!-- <notebook></notebook> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="tree_view_logistic_contacts" model="ir.ui.view">
+            <field name="name">logistic.contacts.tree</field>
+            <field name="model">logistic.contacts</field>
+            <field name="arch" type="xml">
+                <tree string='Danh sách liên hệ'>
+                    <field name="sender_name" string="Người gửi" />
+                    <field name="sender_mobile" string="Số điện thoại người gửi" />
+                    <field name="sender_street" string="Địa chỉ người gửi" />
+                    <!-- ========================================  -->
+                    <field name="receiver_name" string="Người nhận" />
+                    <field name="receiver_mobile" string="Số điện thoại người nhận" />
+                    <field name="receiver_street" string="Địa chỉ người nhận" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="kanban_view_logistic_contacts" model="ir.ui.view">
+            <field name="name">logistic.contacts.kanban</field>
+            <field name="model">logistic.contacts</field>
+            <field name="arch" type="xml">
+                <kanban string="Thông tin kiện hàng">
+                    <field name="sender_name"/>
+                    <field name="sender_mobile"/>
+                    <!-- ============================= -->
+                    <field name="receiver_name"/>
+                    <field name="receiver_mobile"/>
+                    <field name="receiver_street"/>
+                    <field name="receiver_city"/>
+                    <field name="receiver_country_id"/>
+                    <!-- ============================= -->
+                    <field name="product_template_image"/>
+                    <field name="product_name"/>
+                    <field name="product_weight"/>
+                    <field name="properties_of_goods"/>
+                    <field name="product_lengh"/>
+                    <field name="product_width"/>
+                    <field name="product_height"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <!-- Mã  Đơn Hàng -->
+                                    <!-- <div>
+                                        <strong>Mã Đơn Hàng: </strong> 
+                                        <span t-esc="record.order_code.value"/>
+                                    </div> -->
+                                    <!-- Tên Kiện Hàng -->
+                                    <div>
+                                        <h3>Tên Kiện Hàng: 
+                                            <span t-esc="record.product_name.value"/>
+                                        </h3> 
+                                    </div>
+                                    
+                                    <!-- Khối lượng hàng -->
+                                    <div>
+                                        <strong>Khối Lượng (Kg): </strong> 
+                                        <span t-esc="record.product_weight.value"/>
+                                    </div>
+                                    
+                                    <!-- Loại hàng hóa -->
+                                    <div>
+                                        <strong>Loại Hàng: </strong> 
+                                        <span t-esc="record.properties_of_goods.value"/>
+                                    </div>
+
+                                    <!-- Chiều dài -->
+                                    <div>
+                                        <strong>Chiều dài (cm): </strong> 
+                                        <span t-esc="record.product_lengh.value"/>
+                                    </div>
+
+                                    <!-- Chiều rộng -->
+                                    <div>
+                                        <strong>Chiều rộng (cm): </strong> 
+                                        <span t-esc="record.product_width.value"/>
+                                    </div>
+
+                                    <!-- Chiều cao -->
+                                    <div>
+                                        <strong>Chiều cao (cm): </strong> 
+                                        <span t-esc="record.product_height.value"/>
+                                    </div>                                    
+
+                                    <!-- Trạng thái đơn hàng -->
+                                    <!-- <div>
+                                        <strong>Trạng thái đơn hàng: </strong> 
+                                        <span t-esc="record.order_status.value"/>
+                                    </div>   -->
+
+                                    <!-- Tên người gửi -->
+                                    <!-- <div>
+                                        <strong>Người gửi: </strong> 
+                                        <span t-esc="record.sender_name.value"/>
+                                    </div> -->
+                                    <!-- Số điện thoại người gửi -->
+                                    <!-- <div>
+                                        <strong>Số điện thoại người gửi: </strong> 
+                                        <span t-esc="record.sender_mobile.value"/>
+                                    </div> -->
+                                    
+                                    <!-- Tên người nhận -->
+                                    <!-- <div>
+                                        <strong>Người nhận: </strong> 
+                                        <span t-esc="record.receiver_name.value"/>
+                                    </div> -->
+                                    <!-- Số điện thoại người nhận -->
+                                    <!-- <div>
+                                        <strong>Số điện thoại người nhận: </strong> 
+                                        <span t-esc="record.receiver_mobile.value"/>
+                                    </div> -->
+                                    <!-- Địa chỉ người nhận -->
+                                    <!-- <div>
+                                        <strong>Địa chỉ người nhận: </strong>
+                                        <span>
+                                            <t t-esc="record.receiver_street.value"/> 
+                                            <t t-if="record.receiver_street.value and (record.receiver_city.value or record.receiver_country_id.value)">, </t>
+                                            <t t-esc="record.receiver_city.value"/>
+                                            <t t-if="record.receiver_city.value and record.receiver_country_id.value">, </t>
+                                            <t t-esc="record.receiver_country_id.value"/>
+                                        </span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_logistic_contacts" model="ir.actions.act_window">
+            <field name="name">Danh sách đơn hàng</field>
+            <field name="res_model">logistic.contacts</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="groups_id" eval="[(4, ref('group_employee'))]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_create">
+                    Tạo mới một liên hệ
+                </p>
+            </field>
+        </record>
+
+        <!-- Action chỉ cho nhóm User POS -->
+        <record id="action_logistic_user_POS" model="ir.actions.act_window">
+            <field name="res_model">logistic.contacts</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_view_logistic_contacts"/>
+            <field name="groups_id" eval="[(4, ref('group_user_pos'))]"/>
+        </record>
+    </data>
+</odoo>

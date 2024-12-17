@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+        <!-- Start Menu View Root -->
+            <menuitem id="Logistic_root" 
+            name="Logistic" 
+            sequence='0'/>
+        <!-- End Menu View Root -->
+
+        <!-- Start menu view Contact -->
+        <!-- Menu Đơn Hàng -->
+        <menuitem 
+            id="menu_logistic_contacts" 
+            name="Đơn Hàng"
+            parent='Logistic_root'
+            sequence="0"
+            action="action_logistic_contacts"
+            groups="group_employee"/>
+
+
+        <!-- Menu Hàng Hóa -->
+        <menuitem 
+            id="menu_logistic_products" 
+            name="Hàng Hóa"
+            parent='Logistic_root'
+            sequence="1"/>
+            <!-- Sub_menu -->
+            <!-- <menuitem 
+            id="submenu_logistic_products" 
+            name="Danh Sách Hàng Hóa"
+            parent='menu_logistic_products'
+            sequence="0"
+            action="action_logistic_product"
+            groups="group_employee"/> -->
+
+            <menuitem 
+            id="submenu_logistic_products_sent" 
+            name="Hàng Hóa Đã Gửi"
+            parent='menu_logistic_products'
+            sequence="1"
+            action="action_logistic_products_sent"
+            groups="group_client"/>
+
+            <menuitem 
+            id="submenu_logistic_products_received" 
+            name="Hàng Hóa Nhận"
+            parent='menu_logistic_products'
+            sequence="2"
+            action="action_logistic_products_received"
+            groups="group_client"/>
+        <!-- End menu view Contact -->
+
+        <!-- POS -->
+        <menuitem id="UserPOS" 
+            name="POS"
+            sequence='2'
+            parent='Logistic_root'
+            action="action_logistic_user_POS" 
+            groups="logistic.group_user_pos"/>
+
+        <!-- Khách hàng -->
+        <menuitem id="Client" 
+            name="Khách Hàng"
+            sequence='3'
+            parent='Logistic_root'
+            action="action_contact" 
+            groups="group_employee"/>
+    <!-- ============================= -->
+        
+    </data>
+</odoo>

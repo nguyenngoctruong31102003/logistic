@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <!-- Nhóm nhân viên -->
+        <record id="group_employee" model="res.groups">
+            <field name="name">Employee Group</field>
+            <field name="category_id" ref="base.module_category_logistic" />
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        </record>
+
+        <!-- Nhóm Client -->
+        <record id="group_client" model="res.groups">
+            <field name="name">Client Group</field>
+            <field name="category_id" ref="base.module_category_logistic" />
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        </record>
+
+        <!-- Nhóm User POS (Chỉ quyền tạo mới thông tin liên hệ) -->
+        <record id='group_user_pos' model="res.groups">
+            <field name="name">User POS</field>
+            <field name="category_id" ref="base.module_category_logistic"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+            <field name="users" eval="[(4, ref('base.user_root')),(4, ref('base.user_admin'))]" />
+        </record>
+    </data>
+</odoo>
+<!-- access_logistic_customer_employee,access_logistic_customer_employee,model_logistic_customers,group_employee,1,1,1,1 -->

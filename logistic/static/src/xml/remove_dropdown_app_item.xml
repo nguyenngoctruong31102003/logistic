@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.NavBar" t-inherit-mode="extension">
+        <xpath expr="//nav" position="attributes">
+        <t t-if="state.UserPOS or state.Client">
+            <attribute name="class">o_main_navbar position-relative</attribute>
+        </t>
+        </xpath>
+        <xpath expr="//t[@t-call='web.NavBar.AppsMenu']" position="before">
+            <t t-if="state.UserPOS">
+                <div class="position-absolute w-100 d-flex justify-content-center o_menu_sections d-md-flex w-0" role="menu">
+                    <p class="dropdown-item o_nav_entry fs-2 fw-bold" role="menuitem" tabindex="0" style="position: relative;cursor: pointer;" data-hotkey="1">
+                        Bạn đang đứng tại <t t-esc="user.name" />
+                    </p>
+                </div>
+                 <!-- <Dropdown hotkey="'h'" title="'Home Menu'" class="'o_navbar_apps_menu'">
+                    <t t-set-slot="toggler">
+                        <i class="oi oi-apps" />
+                    </t>
+                    <DropdownItem
+                        t-foreach="apps"
+                        t-as="app"
+                        t-key="app.id"
+                        class="{ 'o_app': true, focus: menuService.getCurrentApp() === app }"
+                        href="getMenuItemHref(app)"
+                        t-esc="app.name"
+                        dataset="{ menuXmlid: app.xmlid, section: app.id }"
+                        onSelected="() => this.onNavBarDropdownItemSelection(app)"
+                    />
+                </Dropdown> -->
+            </t>
+            <t t-if="state.Client">
+                <div class="position-absolute w-100 d-flex justify-content-center o_menu_sections d-md-flex w-0" role="menu">
+                    <p class="dropdown-item o_nav_entry fs-2 fw-bold" role="menuitem" tabindex="0" style="position: relative;cursor: pointer;" data-hotkey="1">
+                        Chào mừng bạn <t t-esc="user.name" />
+                    </p>
+                </div>
+            </t>
+            <!-- <t t-else="">
+                    <t t-call="web.NavBar.AppsMenu">
+                    <t t-set="apps" t-value="menuService.getApps()" />
+                </t> -->
+           
+        </xpath>
+    </t>
+</templates>

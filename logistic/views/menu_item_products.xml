@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <!-- Form View-->
+        <!-- <record id="form_view_logistic_products" model="ir.ui.view">
+            <field name="name">logistic.products.form</field>
+            <field name="model">logistic.products</field>
+            <field name="arch" type="xml">
+                <form string="Hàng Hóa">
+                    <sheet>
+                        <div class="col-lg-12" style="position: relative; margin-bottom: 80px;">
+                            <h1 style='text-align: center;'>
+                                Thông tin kiện hàng
+                            </h1>
+                        </div>
+                        <div>
+                            <group>
+                                <group>
+                                    <field name="product_name"/>
+                                    <field name="product_weight"/>
+                                    <field name="properties_of_goods"/>
+                                </group>
+                                <group>
+                                    <field name="product_lengh"/>
+                                    <field name="product_width"/>
+                                    <field name="product_height"/>
+                                </group>
+                            </group>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record> -->
+
+        <!-- Kanban View -->
+        <record id="kanban_view_logistic_products_sent" model="ir.ui.view">
+            <field name="name">logistic.products.kanban.sent</field>
+            <field name="model">logistic.products</field>
+            <field name="arch" type="xml">
+                <kanban string="">
+                    <field name="order_code"/> 
+                    <field name="receiver_name"/>
+                    <field name="receiver_street"/>
+                    <field name="product_name"/>
+                    <field name="product_weight"/>
+                    <field name="properties_of_goods"/>
+                    <field name="product_lengh"/>
+                    <field name="product_width"/>
+                    <field name="product_height"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">                                
+                                <div class="oe_kanban_details">
+
+                                    <!-- Mã  Đơn Hàng -->
+                                    <div>
+                                        <h4>Mã Đơn Hàng: 
+                                            <span t-esc="record.order_code.value"/>
+                                        </h4> 
+                                    </div>
+                                    
+                                    <!-- Tên kiện hàng -->
+                                    <div>
+                                        <strong>Tên Kiện Hàng: </strong> 
+                                        <span t-esc="record.product_name.value"/>
+                                    </div>
+
+                                    <!-- Thông tin người nhận: Chỉ hiển thị khi là người gửi -->
+                                    <div>
+                                        <strong>Tên người nhận: </strong>
+                                        <span t-esc="record.receiver_name.value"/>
+                                    </div>
+                                    <div>
+                                        <strong>Địa chỉ người nhận: </strong>
+                                        <span t-esc="record.receiver_street.value"/>
+                                    </div>
+                                    
+                                    <!-- Khối lượng hàng -->
+                                    <div>
+                                        <strong>Khối Lượng (Kg): </strong> 
+                                        <span t-esc="record.product_weight.value"/>
+                                    </div>       
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="kanban_view_logistic_products_received" model="ir.ui.view">
+            <field name="name">logistic.products.kanban.received</field>
+            <field name="model">logistic.products</field>
+            <field name="arch" type="xml">
+                <kanban string="">
+                    <field name="order_code"/> 
+                    <field name="sender_name"/>
+                    <field name="sender_street"/>
+                    <field name="product_name"/>
+                    <field name="product_weight"/>
+                    <field name="properties_of_goods"/>
+                    <field name="product_lengh"/>
+                    <field name="product_width"/>
+                    <field name="product_height"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">                                
+                                <div class="oe_kanban_details">
+
+                                    <!-- Mã  Đơn Hàng -->
+                                    <div>
+                                        <h4>Mã Đơn Hàng: 
+                                            <span t-esc="record.order_code.value"/>
+                                        </h4> 
+                                    </div>
+                                    
+                                    <!-- Tên kiện hàng -->
+                                    <div>
+                                        <strong>Tên Kiện Hàng: </strong> 
+                                        <span t-esc="record.product_name.value"/>
+                                    </div>
+
+                                    <!-- Thông tin người gửi: Chỉ hiển thị khi là người nhận -->
+                                    <div>
+                                        <strong>Tên người gửi: </strong>
+                                        <span t-esc="record.sender_name.value"/>
+                                    </div>
+                                    <div>
+                                        <strong>Địa chỉ người gửi: </strong>
+                                        <span t-esc="record.sender_street.value"/>
+                                    </div>
+                                    
+                                    <!-- Khối lượng hàng -->
+                                    <div>
+                                        <strong>Khối Lượng (Kg): </strong> 
+                                        <span t-esc="record.product_weight.value"/>
+                                    </div>       
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Tree View For Sender -->
+        <!-- <record id="tree_view_logistic_products_sent" model="ir.ui.view">
+            <field name="name">logistic.products.tree.sent</field>
+            <field name="model">logistic.products</field>
+            <field name="arch" type="xml">
+                <tree string="Hàng hóa đã gửi">
+                    <field name="product_name"/>
+                    <field name="receiver_name"/>
+                    <field name="receiver_street"/>
+                </tree>
+            </field>
+        </record> -->
+        <!-- Tree View For Receiver -->
+        <!-- <record id="tree_view_logistic_products_received" model="ir.ui.view">
+            <field name="name">logistic.products.tree.received</field>
+            <field name="model">logistic.products</field>
+            <field name="arch" type="xml">
+                <tree string="Hàng hóa nhận">
+                    <field name="product_name"/>
+                    <field name="sender_name"/>
+                    <field name="sender_street"/>
+                </tree>
+            </field>
+        </record> -->
+
+
+        <!-- Start View Search -->
+        <record id="search_view_logistic_products" model="ir.ui.view">
+            <field name="name">logistic.products.search.view</field>
+            <field name="model">logistic.products</field>
+            <field name="arch" type="xml">
+                <search string="Tìm kiếm kiện hàng">
+                    <field name="order_code"/>
+                    <field name="product_name"/>
+            </search>
+            </field>
+        </record>
+        <!-- End View Search -->
+
+        <!-- Start Action -->
+        <!-- Action Hàng Hóa Gửi -->
+        <record id="action_logistic_products_sent" model="ir.actions.act_window">
+            <field name="name">Hàng hóa đã gửi</field>
+            <field name="res_model">logistic.products</field>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="kanban_view_logistic_products_sent"/>
+            <field name="domain">[('sender_id', '=', uid)]</field>
+            <field name="groups_id" eval="[(4, ref('group_client'))]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_create">
+                    Bạn chưa có đơn hàng gửi nào
+                </p>
+            </field>
+        </record>
+
+        <!-- Action Hàng Hóa Nhận -->
+        <record id="action_logistic_products_received" model="ir.actions.act_window">
+            <field name="name">Hàng hóa nhận</field>
+            <field name="res_model">logistic.products</field>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="kanban_view_logistic_products_received"/>
+            <field name="domain">[('receiver_id', '=', uid)]</field>
+            <field name="groups_id" eval="[(4, ref('group_client'))]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_create">
+                    Bạn chưa có đơn hàng nhận nào
+                </p>
+            </field>
+        </record>
+
+        <!-- End Action -->
+    </data>
+</odoo>
